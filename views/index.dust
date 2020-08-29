@@ -1,0 +1,103 @@
+{>"layout" /}
+{<body}
+<button type="button" class="btn btn-light text-dark btn-block" data-toggle = "modal" data-target = "#formModal">
+    Add Goal
+</button>
+<br>
+{#goals}
+<div class="card bg-light mb-3">
+    <div class="card-body">
+        <h3>{goal}
+            <button class="btn btn-secondary float-right" data-toggle="collapse" href="#goals_{id}" role="button" aria-expanded="false" aria-controls="goals_{id}">
+            <i class="fa fa-caret-down fa-lg" aria-hidden="true"></i></button></h3>
+
+
+                <div class="collapse" id="goals_{id}">
+                    <br/>
+                    <p><strong>Deadline:<br> </strong>{deadline}</p>
+                    <p><strong>Thoughts:<br> </strong>{thoughts}</p>
+                    <hr>
+                    <button class="btn btn-dark edit-goal mr-2"
+                    data-toggle = "modal" 
+                    data-target = "#editFormModal" 
+                    data-id="{id}" 
+                    data-goal="{goal}"
+                    data-deadline="{deadline}"
+                    data-thoughts="{thoughts}"><i class="fa fa-pencil-square-o fa-lg " aria-hidden="true"></i></button>
+                    <button class="btn btn-danger delete-goal" data-id = "{id}"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
+                </div>
+    </div>
+</div>
+{/goals}
+
+<!-- Add Form Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <form action="/add" method = "POST">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Goal</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Goal</label>
+                    <input type="text" class="form-control" name="goal">
+                </div>
+                <div class="form-group">
+                    <label>Deadline</label>
+                    <input type="text" class="form-control" name="deadline">
+                   
+                </div>
+                <div class="form-group">
+                    <label>Thoughts</label>
+                    <textarea name="thoughts" class="form-control"></textarea> 
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="Save"/>
+            </div>
+        </form>
+        </div>
+    </div>
+  </div>
+
+ <!--Edit form modal  -->
+ <div class="modal fade" id="editFormModal" tabindex="-1" role="dialog" aria-labelledby="editFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <form action="/edit" method = "POST">
+        <input type="hidden" id="edit-form-id" name="id" />
+            <div class="modal-header">
+            <h5 class="modal-title" id="editFormModalLabel">Edit Task</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Goal</label>
+                    <input type="text" class="form-control" name="goal" id="edit-form-goal">
+                </div>
+                <div class="form-group">
+                    <label>Deadline</label>
+                    <input type="text" class="form-control" name="deadline" id="edit-form-deadline">
+                </div>
+                <div class="form-group">
+                    <label>Thoughts</label>
+                    <textarea name="thoughts" class="form-control" id="edit-form-thoughts"></textarea> 
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-primary" value="Save"/>
+            </div>
+        </form>
+        </div>
+    </div>
+  </div>
+
+{/body}
